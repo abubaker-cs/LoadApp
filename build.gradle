@@ -10,6 +10,16 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:7.3.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.5.2"
+
+        // Secrets Gradle Plugin for Android
+        // ===========================================================================
+        // A Gradle plugin for providing your secrets securely to your Android project.
+        // URL: https://github.com/google/secrets-gradle-plugin
+        classpath "com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin:2.0.1"
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
