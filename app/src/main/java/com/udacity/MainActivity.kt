@@ -12,6 +12,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.databinding.DataBindingUtil
+import com.udacity.Constants.URL_UDACITY
 import com.udacity.databinding.ActivityMainBinding
 
 
@@ -62,7 +63,7 @@ class MainActivity : AppCompatActivity() {
      */
     private fun download() {
         val request =
-            DownloadManager.Request(Uri.parse(Constants.URL_UDACITY))
+            DownloadManager.Request(Uri.parse(URL_UDACITY))
                 .setTitle(getString(R.string.app_name))
                 .setDescription(getString(R.string.app_description))
                 .setRequiresCharging(false)
