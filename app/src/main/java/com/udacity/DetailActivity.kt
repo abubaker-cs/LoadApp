@@ -11,6 +11,9 @@ class DetailActivity : AppCompatActivity() {
     private var name = ""
     private var status = ""
 
+    /**
+     * onCreate()
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

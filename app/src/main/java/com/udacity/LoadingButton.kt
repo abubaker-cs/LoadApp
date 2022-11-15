@@ -7,14 +7,19 @@ import android.util.AttributeSet
 import android.view.View
 import kotlin.properties.Delegates
 
+/**
+ * Custom Loading Button
+ */
 class LoadingButton @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
+
     private var widthSize = 0
     private var heightSize = 0
 
     private val valueAnimator = ValueAnimator()
-
     private var buttonState: ButtonState by Delegates.observable<ButtonState>(ButtonState.Completed) { p, old, new ->
 
     }
@@ -25,11 +30,17 @@ class LoadingButton @JvmOverloads constructor(
     }
 
 
+    /**
+     * onDraw()
+     */
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
     }
 
+    /**
+     * onMeasure
+     */
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         val minw: Int = paddingLeft + paddingRight + suggestedMinimumWidth
         val w: Int = resolveSizeAndState(minw, widthMeasureSpec, 1)
@@ -38,8 +49,10 @@ class LoadingButton @JvmOverloads constructor(
             heightMeasureSpec,
             0
         )
+
         widthSize = w
         heightSize = h
+
         setMeasuredDimension(w, h)
     }
 
