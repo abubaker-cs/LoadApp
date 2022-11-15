@@ -20,6 +20,13 @@ class LoadingButton @JvmOverloads constructor(
     private var heightSize = 0
 
     private val valueAnimator = ValueAnimator()
+
+    /**
+     * buttonState()
+     * 1. Loading
+     * 2. Completed
+     * 3. Else -
+     */
     private var buttonState: ButtonState by Delegates.observable<ButtonState>(ButtonState.Completed) { p, old, new ->
 
     }
