@@ -29,6 +29,6 @@ object Constants {
     /**
      * Configuration for Custom Button
      */
-    const val BUTTON_ANIMATION_DURATION: Long = 5000
+    const val BUTTON_ANIMATION_DURATION: Long = 2500
 
 }
