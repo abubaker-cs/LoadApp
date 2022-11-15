@@ -4,10 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     >
 
-    <data>
-
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,6 +11,70 @@
         tools:context=".DetailActivity"
         tools:showIn="@layout/activity_detail"
         >
+
+        <!-- File Name -->
+        <TextView
+            android:id="@+id/file_name_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:text="File Name"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/file_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:textSize="18sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/file_name_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Glide"
+            />
+
+        <!-- Download Status: -->
+        <TextView
+            android:id="@+id/status_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="68dp"
+            android:text="File Download Status"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/file_name_label"
+            app:layout_constraintTop_toBottomOf="@+id/file_name"
+            />
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/status_label"
+            app:layout_constraintEnd_toEndOf="@+id/file_name"
+            tools:text="Success"
+            />
+
+        <!-- Button -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_ok"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/colorPrimaryDark"
+            android:text="OK"
+            android:textColor="@color/white"
+            app:cornerRadius="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.517"
+            app:layout_constraintStart_toStartOf="parent"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
