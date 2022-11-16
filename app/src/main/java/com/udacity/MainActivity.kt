@@ -162,16 +162,18 @@ class MainActivity : AppCompatActivity() {
      */
     private fun download() {
         val request =
-            DownloadManager.Request(Uri.parse(URL_UDACITY))
+            DownloadManager.Request(Uri.parse(url))
                 .setTitle(getString(R.string.app_name))
-                .setDescription(getString(R.string.app_description))
+                .setDescription(String.format(getString(R.string.app_description), fileName))
                 .setRequiresCharging(false)
                 .setAllowedOverMetered(true)
                 .setAllowedOverRoaming(true)
 
         val downloadManager = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
+
+        // enqueue puts the download request in the queue.
         downloadID =
-            downloadManager.enqueue(request)// enqueue puts the download request in the queue.
+            downloadManager.enqueue(request)
     }
 
     /**
