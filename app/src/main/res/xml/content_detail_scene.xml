@@ -7,12 +7,12 @@
         app:autoTransition="animateToEnd"
         app:constraintSetEnd="@id/end"
         app:constraintSetStart="@+id/start"
-        app:duration="2000"
+        app:duration="1000"
         >
 
         <KeyFrameSet>
             <KeyAttribute
-                android:alpha="0.3"
+                android:alpha="0.25"
                 app:framePosition="50"
                 app:motionTarget="@id/status"
                 />
