@@ -16,7 +16,20 @@
     <string name="title_activity_detail">DetailActivity</string>
     <string name="header_img_desc">Header section with download image icon</string>
 
-    <string name="glide_desc">Glide - Image Loading Library by BumpTech</string>
-    <string name="load_app_desc">LoadApp - Current repository by Udacity</string>
-    <string name="retrofit_desc">Retrofit - Type-safe HTTP client for Android and Java by Square, Inc</string>
+    <string name="desc_glide">Glide - Image Loading Library by BumpTech</string>
+    <string name="desc_udacity">LoadApp - Current repository by Udacity</string>
+    <string name="desc_retrofit">Retrofit - Type-safe HTTP client for Android and Java by Square, Inc</string>
+
+    <string name="source_glide">Glide</string>
+    <string name="source_retrofit">Retrofit</string>
+    <string name="source_udacity">Udacity</string>
+
+    <string name="failed_status">Failed</string>
+    <string name="success_status">Success</string>
+
+    <string name="loading_completed">Loading Completed</string>
+    <string name="see_result">Check the status</string>
+
+    <string name="select_from_list">Please select from list</string>
+
 </resources>

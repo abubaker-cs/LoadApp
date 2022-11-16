@@ -42,7 +42,7 @@
                 android:id="@+id/radio_glide"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/glide_desc"
+                android:text="@string/desc_glide"
                 android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
                 />
 
@@ -51,7 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="12dp"
-                android:text="@string/load_app_desc"
+                android:text="@string/desc_udacity"
                 android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
                 />
 
@@ -59,7 +59,7 @@
                 android:id="@+id/radio_retrofit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/retrofit_desc"
+                android:text="@string/desc_retrofit"
                 android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
                 />
         </RadioGroup>
