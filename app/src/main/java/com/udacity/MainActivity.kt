@@ -90,6 +90,7 @@ class MainActivity : AppCompatActivity() {
      * override 01 - onCreate()
      */
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
 
         // Inflate Layout: @layout/activity_main.xml
@@ -162,6 +163,8 @@ class MainActivity : AppCompatActivity() {
      * fun 01 - download()
      */
     private fun download() {
+
+        // 1. Prepare Custom Query with Constraints to be executed
         val request = DownloadManager.Request(Uri.parse(url))
             .setTitle(getString(R.string.app_name))
             .setDescription(String.format(getString(R.string.app_description), fileName))
@@ -169,9 +172,8 @@ class MainActivity : AppCompatActivity() {
             .setAllowedOverMetered(true)
             .setAllowedOverRoaming(true)
 
+        // 2. Execute the Query: Enqueue puts the download request in the queue.
         val downloadManager = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
-
-        // enqueue puts the download request in the queue.
         downloadID = downloadManager.enqueue(request)
     }
 
@@ -180,8 +182,34 @@ class MainActivity : AppCompatActivity() {
      */
     private fun sendNotifications(status: String) {
 
-        createChannel()
+        /**
+         * Create Notification Channel
+         */
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                CHANNEL_ID,
+                CHANNEL_NAME,
+                NotificationManager.IMPORTANCE_DEFAULT
+            )
 
+            channel.enableVibration(true)
+            channel.enableLights(true)
+
+            channel.description = getString(R.string.loading_completed)
+
+            val notificationManager = this.getSystemService(
+                NotificationManager::class.java
+            )
+
+            notificationManager.createNotificationChannel(channel)
+
+        }
+
+        /**
+         * Intent Configuration: This will forward details to the DetailedActivity:
+         * 1. Download Status of the File
+         * 2. Name of the SOURCE
+         */
         intent = Intent(applicationContext, DetailActivity::class.java)
         intent.putExtra(KEY_STATUS, status)
         intent.putExtra(KEY_FILENAME, fileName)
@@ -213,32 +241,6 @@ class MainActivity : AppCompatActivity() {
         ) as NotificationManager
 
         notificationManager.notify(NOTIFICATION_ID, builder.build())
-    }
-
-    /**
-     * fun 03 - createChannel()
-     */
-    private fun createChannel() {
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(
-                CHANNEL_ID,
-                CHANNEL_NAME,
-                NotificationManager.IMPORTANCE_DEFAULT
-            )
-
-            channel.enableVibration(true)
-            channel.enableLights(true)
-
-            channel.description = getString(R.string.loading_completed)
-
-            val notificationManager = this.getSystemService(
-                NotificationManager::class.java
-            )
-
-            notificationManager.createNotificationChannel(channel)
-
-        }
     }
 
     /**
