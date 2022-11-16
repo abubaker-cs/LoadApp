@@ -61,7 +61,7 @@
             />
 
         <!-- Button -->
-        <com.google.android.material.button.MaterialButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_ok"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
             app:cornerRadius="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.517"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             />
 
