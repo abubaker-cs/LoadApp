@@ -257,7 +257,7 @@ class MainActivity : AppCompatActivity() {
             "https://codeload.github.com/udacity/nd940-c3-advanced-android-programming-project-starter/zip/refs/heads/master"
 
         /**
-         * Channel
+         * Notification Message (Parameters)
          */
         private const val NOTIFICATION_ID = 1
         private const val CHANNEL_ID = "channelId"

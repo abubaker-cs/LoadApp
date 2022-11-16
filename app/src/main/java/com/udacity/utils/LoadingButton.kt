@@ -68,6 +68,11 @@ class LoadingButton @JvmOverloads constructor(
             // Loading
             ButtonState.Loading -> {
 
+                /**
+                 * ValueAnimator provides a timing engine for running animation which calculates
+                 * the animated values and set them on the target objects.
+                 */
+
                 valueAnimator = ValueAnimator.ofFloat(0f, 1f).apply {
 
                     //
@@ -82,8 +87,8 @@ class LoadingButton @JvmOverloads constructor(
                     //
                     repeatMode = ValueAnimator.RESTART
 
-                    //
-                    duration = BUTTON_ANIMATION_DURATION
+                    // Button Animation Duration: 2.5sec
+                    duration = 2500
 
                     //
                     start()
@@ -148,7 +153,7 @@ class LoadingButton @JvmOverloads constructor(
     /**
      * Will be used inside the drawTextButton() button
      */
-    private val paintText = TextPaint(Paint.ANTI_ALIAS_FLAG).apply {
+    private val btnLabelSettings = TextPaint(Paint.ANTI_ALIAS_FLAG).apply {
 
         //
         style = Paint.Style.FILL
@@ -168,7 +173,7 @@ class LoadingButton @JvmOverloads constructor(
     }
 
     //
-    private val paintBackground = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+    private val btnBackgroundSettings = Paint(Paint.ANTI_ALIAS_FLAG).apply {
 
         //
         style = Paint.Style.FILL
@@ -179,7 +184,7 @@ class LoadingButton @JvmOverloads constructor(
     }
 
     //
-    private val paintProgress = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+    private val circularAnimationSettings = Paint(Paint.ANTI_ALIAS_FLAG).apply {
 
         //
         color = circleProgressColor
@@ -190,7 +195,7 @@ class LoadingButton @JvmOverloads constructor(
     }
 
     /**
-     * 01 - onDraw()
+     * 01 Create the Custom Button - onDraw()
      */
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
@@ -198,28 +203,28 @@ class LoadingButton @JvmOverloads constructor(
         canvas?.apply {
 
             //
-            drawBackgroundButton(canvas)
+            buttonBackground(canvas)
 
             when (buttonState) {
                 ButtonState.Loading -> {
-                    drawBackgroundButton(canvas, buttonProgress)
+                    buttonBackground(canvas, buttonProgress)
                     drawArc(
                         animatedCircleBeforeButtonLabel,
                         -180f,
                         buttonProgress * 360,
                         true,
-                        paintProgress
+                        circularAnimationSettings
                     )
 
-                    drawTextButton(canvas, resources.getString(R.string.button_loading))
+                    buttonText(canvas, resources.getString(R.string.button_loading))
                 }
 
                 ButtonState.Completed -> {
-                    drawTextButton(canvas, resources.getString(R.string.button_download_completed))
+                    buttonText(canvas, resources.getString(R.string.button_download_completed))
                 }
 
                 else -> {
-                    drawTextButton(canvas, textButton)
+                    buttonText(canvas, textButton)
                 }
             }
 
@@ -229,27 +234,34 @@ class LoadingButton @JvmOverloads constructor(
     }
 
     /**
-     * 03 - drawBackgroundButton
+     * 03 Background: drawBackgroundButton
      */
-    private fun drawBackgroundButton(canvas: Canvas?, progress: Float? = null) {
+    private fun buttonBackground(canvas: Canvas?, progress: Float? = null) {
 
         canvas?.apply {
 
+            //
             if (progress != null) {
-                paintBackground.alpha = 220
+                btnBackgroundSettings.alpha = 220
             }
 
             //
-            drawRect(0f, 0f, width.toFloat() * (progress ?: 1f), height.toFloat(), paintBackground)
+            drawRect(
+                0f,
+                0f,
+                width.toFloat() * (progress ?: 1f),
+                height.toFloat(),
+                btnBackgroundSettings
+            )
 
         }
 
     }
 
     /**
-     * 04 -
+     * 04 Button Label: drawTextButton
      */
-    private fun drawTextButton(
+    private fun buttonText(
 
         // Pass the reference to the Canvas
         canvas: Canvas?,
@@ -264,7 +276,7 @@ class LoadingButton @JvmOverloads constructor(
             val posTextX = (width / 2).toFloat()
 
             // Position: Y
-            val posTextY = ((height - (paintText.descent() + paintText.ascent())) / 2)
+            val posTextY = ((height - (btnLabelSettings.descent() + btnLabelSettings.ascent())) / 2)
 
             // Draw the Button, with custom parameters
             drawText(
@@ -279,7 +291,7 @@ class LoadingButton @JvmOverloads constructor(
                 posTextY,
 
                 // Apply styles for (1) Fill Style, (2) Typeface, (3) Font Size, (4) Text Alignment, (5) Text Color
-                paintText
+                btnLabelSettings
             )
         }
     }
@@ -319,12 +331,5 @@ class LoadingButton @JvmOverloads constructor(
 
     }
 
-
-    companion object {
-        /**
-         * Configuration for Custom Button
-         */
-        private const val BUTTON_ANIMATION_DURATION: Long = 2500
-    }
 
 }

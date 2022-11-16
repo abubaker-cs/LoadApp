@@ -11,7 +11,10 @@ import com.udacity.databinding.ContentDetailBinding
 
 class DetailActivity : AppCompatActivity() {
 
+    //
     private lateinit var _binding: ActivityDetailBinding
+
+    //
     private lateinit var _bindingDetailContent: ContentDetailBinding
 
     /**
@@ -24,8 +27,10 @@ class DetailActivity : AppCompatActivity() {
         _binding = DataBindingUtil.setContentView(this, R.layout.activity_detail)
         _bindingDetailContent = _binding.detailContent
 
+        //
         _binding.lifecycleOwner = this
 
+        //
         setSupportActionBar(_binding.toolbar)
 
         //
@@ -34,14 +39,23 @@ class DetailActivity : AppCompatActivity() {
 
         //
         if (intent.getStringExtra(KEY_STATUS) == "Failed") {
+
+            //
             _bindingDetailContent.status.setTextColor(Color.RED)
+
         } else {
+
+            //
             _bindingDetailContent.status.setTextColor(Color.GREEN)
+
         }
 
         //
         _bindingDetailContent.btnOk.setOnClickListener {
+
+            //
             finish()
+
         }
 
     }
