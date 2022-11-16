@@ -20,7 +20,6 @@ import com.udacity.Constants.KEY_FILENAME
 import com.udacity.Constants.KEY_STATUS
 import com.udacity.databinding.ActivityMainBinding
 import com.udacity.databinding.ContentMainBinding
-import com.udacity.utils.ButtonState
 
 
 class MainActivity : AppCompatActivity() {
@@ -78,6 +77,7 @@ class MainActivity : AppCompatActivity() {
 
         // Radio Button : Clicked ?
         _binding.contentMain.radioGroup.setOnCheckedChangeListener { _, index ->
+
             when (index) {
                 R.id.radio_glide -> {
                     url = URL_GLIDE
@@ -172,8 +172,7 @@ class MainActivity : AppCompatActivity() {
         val downloadManager = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
 
         // enqueue puts the download request in the queue.
-        downloadID =
-            downloadManager.enqueue(request)
+        downloadID = downloadManager.enqueue(request)
     }
 
     /**
@@ -232,9 +231,11 @@ class MainActivity : AppCompatActivity() {
             channel.enableLights(true)
 
             channel.description = getString(R.string.loading_completed)
+
             val notificationManager = this.getSystemService(
                 NotificationManager::class.java
             )
+
             notificationManager.createNotificationChannel(channel)
 
         }

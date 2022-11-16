@@ -1,4 +1,4 @@
-package com.udacity.utils
+package com.udacity
 
 import android.animation.ValueAnimator
 import android.content.Context
@@ -7,8 +7,6 @@ import android.text.TextPaint
 import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.withStyledAttributes
-import com.udacity.Constants.BUTTON_ANIMATION_DURATION
-import com.udacity.R
 import kotlin.properties.Delegates
 
 /**
@@ -167,6 +165,7 @@ class LoadingButton @JvmOverloads constructor(
      * Initial Configuration
      */
     init {
+
         context.withStyledAttributes(attrs, R.styleable.LoadingButton) {
 
             // Background Color
@@ -184,6 +183,7 @@ class LoadingButton @JvmOverloads constructor(
 
         //
         buttonState = ButtonState.Clicked
+
     }
 
 
@@ -312,6 +312,13 @@ class LoadingButton @JvmOverloads constructor(
                 paintText
             )
         }
+    }
+
+    companion object {
+        /**
+         * Configuration for Custom Button
+         */
+        private const val BUTTON_ANIMATION_DURATION: Long = 2500
     }
 
 }
