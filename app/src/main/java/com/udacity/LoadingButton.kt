@@ -56,50 +56,6 @@ class LoadingButton @JvmOverloads constructor(
     private var oval = RectF(80f, 30f, 200f, 150f)
 
     /**
-     * Will be used inside the drawTextButton() button
-     */
-    private val paintText = TextPaint(Paint.ANTI_ALIAS_FLAG).apply {
-
-        //
-        style = Paint.Style.FILL
-
-        //
-        typeface = Typeface.create("", Typeface.BOLD)
-
-        //
-        textSize = 20.0f * resources.displayMetrics.density
-
-        //
-        textAlign = Paint.Align.CENTER
-
-        //
-        color = Color.WHITE
-
-    }
-
-    //
-    private val paintBackground = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-
-        //
-        style = Paint.Style.FILL
-
-        //
-        color = backgroundButtonColor
-
-    }
-
-    //
-    private val paintProgress = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-
-        //
-        color = circleProgressColor
-
-        //
-        style = Paint.Style.FILL
-
-    }
-
-    /**
      * buttonState()
      * 1. Loading
      * 2. Completed
@@ -160,7 +116,6 @@ class LoadingButton @JvmOverloads constructor(
         }
     }
 
-
     /**
      * Initial Configuration
      */
@@ -188,10 +143,55 @@ class LoadingButton @JvmOverloads constructor(
 
 
     /**
+     * Will be used inside the drawTextButton() button
+     */
+    private val paintText = TextPaint(Paint.ANTI_ALIAS_FLAG).apply {
+
+        //
+        style = Paint.Style.FILL
+
+        //
+        typeface = Typeface.create("", Typeface.BOLD)
+
+        //
+        textSize = 20.0f * resources.displayMetrics.density
+
+        //
+        textAlign = Paint.Align.CENTER
+
+        //
+        color = Color.WHITE
+
+    }
+
+    //
+    private val paintBackground = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+
+        //
+        style = Paint.Style.FILL
+
+        //
+        color = backgroundButtonColor
+
+    }
+
+    //
+    private val paintProgress = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+
+        //
+        color = circleProgressColor
+
+        //
+        style = Paint.Style.FILL
+
+    }
+
+    /**
      * 01 - onDraw()
      */
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
+
         canvas?.apply {
 
             //
@@ -219,43 +219,10 @@ class LoadingButton @JvmOverloads constructor(
                     drawTextButton(canvas, textButton)
                 }
             }
+
             invalidate()
+
         }
-    }
-
-    /**
-     * 02 - onMeasure
-     */
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-
-        //
-        val minWidth: Int = paddingLeft + paddingRight + suggestedMinimumWidth
-
-        //
-        val w: Int = resolveSizeAndState(minWidth, widthMeasureSpec, 1)
-
-        //
-        val h: Int = resolveSizeAndState(
-
-            //
-            MeasureSpec.getSize(w),
-
-            //
-            heightMeasureSpec,
-
-            //
-            0
-        )
-
-        //
-        widthSize = w
-
-        //
-        heightSize = h
-
-        //
-        setMeasuredDimension(w, h)
-
     }
 
     /**
@@ -313,6 +280,42 @@ class LoadingButton @JvmOverloads constructor(
             )
         }
     }
+
+    /**
+     * 02 - onMeasure
+     */
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+
+        //
+        val minWidth: Int = paddingLeft + paddingRight + suggestedMinimumWidth
+
+        //
+        val w: Int = resolveSizeAndState(minWidth, widthMeasureSpec, 1)
+
+        //
+        val h: Int = resolveSizeAndState(
+
+            //
+            MeasureSpec.getSize(w),
+
+            //
+            heightMeasureSpec,
+
+            //
+            0
+        )
+
+        //
+        widthSize = w
+
+        //
+        heightSize = h
+
+        //
+        setMeasuredDimension(w, h)
+
+    }
+
 
     companion object {
         /**
