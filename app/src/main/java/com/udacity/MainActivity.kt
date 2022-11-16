@@ -20,6 +20,7 @@ import com.udacity.Constants.KEY_FILENAME
 import com.udacity.Constants.KEY_STATUS
 import com.udacity.databinding.ActivityMainBinding
 import com.udacity.databinding.ContentMainBinding
+import com.udacity.utils.ButtonState
 
 
 class MainActivity : AppCompatActivity() {
@@ -42,6 +43,48 @@ class MainActivity : AppCompatActivity() {
 
     //
     private lateinit var url: String
+
+    /**
+     * Receiver
+     */
+    private val receiver = object : BroadcastReceiver() {
+
+        override fun onReceive(context: Context?, intent: Intent?) {
+
+            val id = intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
+
+            if (id == -1L)
+                return
+
+            id?.let { intentId ->
+                val downloadManager = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
+                val query = DownloadManager.Query()
+
+                query.setFilterById(intentId)
+
+                val cursor = downloadManager.query(query)
+
+                if (cursor.moveToFirst()) {
+
+                    val index = cursor.getColumnIndex(DownloadManager.COLUMN_STATUS)
+
+                    val downloadStatus =
+                        if (DownloadManager.STATUS_SUCCESSFUL == cursor.getInt(index))
+                            getString(R.string.success_status)
+                        else
+                            getString(R.string.failed_status)
+
+                    sendNotifications(downloadStatus)
+
+                    // Custom Button State: Completed
+                    _bindingDetailContent.customButton.buttonState = ButtonState.Completed
+
+                }
+
+            }
+
+        }
+    }
 
     /**
      * override 01 - onCreate()
@@ -116,58 +159,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * Receiver
-     */
-    private val receiver = object : BroadcastReceiver() {
-
-        override fun onReceive(context: Context?, intent: Intent?) {
-
-            val id = intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
-
-            if (id == -1L)
-                return
-
-            id?.let { intentId ->
-                val downloadManager = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
-                val query = DownloadManager.Query()
-
-                query.setFilterById(intentId)
-
-                val cursor = downloadManager.query(query)
-
-                if (cursor.moveToFirst()) {
-
-                    val index = cursor.getColumnIndex(DownloadManager.COLUMN_STATUS)
-
-                    val downloadStatus =
-                        if (DownloadManager.STATUS_SUCCESSFUL == cursor.getInt(index))
-                            getString(R.string.success_status)
-                        else
-                            getString(R.string.failed_status)
-
-                    sendNotifications(downloadStatus)
-
-                    // Custom Button State: Completed
-                    _bindingDetailContent.customButton.buttonState = ButtonState.Completed
-
-                }
-
-            }
-
-        }
-    }
-
-    /**
      * fun 01 - download()
      */
     private fun download() {
-        val request =
-            DownloadManager.Request(Uri.parse(url))
-                .setTitle(getString(R.string.app_name))
-                .setDescription(String.format(getString(R.string.app_description), fileName))
-                .setRequiresCharging(false)
-                .setAllowedOverMetered(true)
-                .setAllowedOverRoaming(true)
+        val request = DownloadManager.Request(Uri.parse(url))
+            .setTitle(getString(R.string.app_name))
+            .setDescription(String.format(getString(R.string.app_description), fileName))
+            .setRequiresCharging(false)
+            .setAllowedOverMetered(true)
+            .setAllowedOverRoaming(true)
 
         val downloadManager = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
 

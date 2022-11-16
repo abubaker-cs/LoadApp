@@ -1,4 +1,4 @@
-package com.udacity
+package com.udacity.utils
 
 /**
  * We are defining 3 different states for our custom Button States:
