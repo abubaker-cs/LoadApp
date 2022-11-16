@@ -22,7 +22,6 @@ import com.udacity.databinding.ActivityMainBinding
 import com.udacity.databinding.ContentMainBinding
 import com.udacity.utils.ButtonState
 
-
 class MainActivity : AppCompatActivity() {
 
     // Binding
