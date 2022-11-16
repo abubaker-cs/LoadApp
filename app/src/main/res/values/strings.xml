@@ -10,6 +10,9 @@
 
     <string name="button_name">Click me</string>
     <string name="button_loading">We are loading </string>
+
+    <string name="button_download_completed">Download Completed</string>
+
     <string name="title_activity_detail">DetailActivity</string>
     <string name="header_img_desc">Header section with download image icon</string>
 

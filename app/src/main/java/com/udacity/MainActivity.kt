@@ -12,7 +12,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.databinding.DataBindingUtil
-import com.udacity.Constants.URL_UDACITY
 import com.udacity.databinding.ActivityMainBinding
 
 
@@ -73,6 +72,30 @@ class MainActivity : AppCompatActivity() {
         val downloadManager = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
         downloadID =
             downloadManager.enqueue(request)// enqueue puts the download request in the queue.
+    }
+
+    /**
+     * Constants
+     */
+    companion object {
+
+        /**
+         * URLs of the files to be downloaded
+         */
+        private const val URL_GLIDE =
+            "https://github.com/bumptech/glide/archive/refs/heads/master.zip"
+        private const val URL_RETROFIT =
+            "https://github.com/square/retrofit/archive/refs/heads/master.zip"
+        private const val URL_UDACITY =
+            "https://codeload.github.com/udacity/nd940-c3-advanced-android-programming-project-starter/zip/refs/heads/master"
+
+        /**
+         * Channel
+         */
+        private const val NOTIFICATION_ID = ""
+        private const val CHANNEL_ID = "channelId"
+        private const val CHANNEL_NAME = ""
+
     }
 
 }
