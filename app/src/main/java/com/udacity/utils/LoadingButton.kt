@@ -54,7 +54,7 @@ class LoadingButton @JvmOverloads constructor(
     private var textButton = ""
 
     //
-    private var oval = RectF(80f, 30f, 200f, 150f)
+    private var animatedCircleBeforeButtonLabel = RectF(80f, 16f, 160f, 96f)
 
     /**
      * buttonState()
@@ -65,6 +65,7 @@ class LoadingButton @JvmOverloads constructor(
     var buttonState: ButtonState by Delegates.observable(ButtonState.Completed) { _, _, new ->
         when (new) {
 
+            // Loading
             ButtonState.Loading -> {
 
                 valueAnimator = ValueAnimator.ofFloat(0f, 1f).apply {
@@ -93,6 +94,7 @@ class LoadingButton @JvmOverloads constructor(
                 isEnabled = false
             }
 
+            // Completed
             ButtonState.Completed -> {
 
                 // Cancel animator
@@ -202,7 +204,7 @@ class LoadingButton @JvmOverloads constructor(
                 ButtonState.Loading -> {
                     drawBackgroundButton(canvas, buttonProgress)
                     drawArc(
-                        oval,
+                        animatedCircleBeforeButtonLabel,
                         -180f,
                         buttonProgress * 360,
                         true,
