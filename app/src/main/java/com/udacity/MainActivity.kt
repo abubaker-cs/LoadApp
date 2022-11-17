@@ -24,7 +24,7 @@ import com.udacity.utils.ButtonState
 
 class MainActivity : AppCompatActivity() {
 
-    // Binding
+    // We are defining few variables which will be later on used to make references to the views
     private lateinit var _binding: ActivityMainBinding
     private lateinit var _bindingDetailContent: ContentMainBinding
 
@@ -92,17 +92,19 @@ class MainActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
 
-        // Inflate Layout: @layout/activity_main.xml
+        // Inflate Layout: @layout/activity_main.xml and bind @layout/content_main.xml
         _binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         _bindingDetailContent = _binding.contentMain
 
-        //
+        // Specify the current activity as the lifecycle owner.
         _binding.lifecycleOwner = this
 
+        // This will enable the Toolbar to act as the ActionBar for this Activity window.
         setSupportActionBar(_binding.toolbar)
 
         registerReceiver(receiver, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
 
+        // onClickEvent: Download (Button)
         _bindingDetailContent.customButton.setOnClickListener {
             if (::url.isInitialized) {
 
@@ -118,19 +120,24 @@ class MainActivity : AppCompatActivity() {
                 ).show()
         }
 
-        // Radio Button : Clicked ?
+        // onClickEvent: File Source (Radio Group)
         _binding.contentMain.radioGroup.setOnCheckedChangeListener { _, index ->
 
             when (index) {
+
+                // Glide
                 R.id.radio_glide -> {
                     url = URL_GLIDE
                     fileName = getString(R.string.source_glide)
                 }
 
+                // Retrofit
                 R.id.radio_retrofit -> {
                     url = URL_RETROFIT
                     fileName = getString(R.string.source_retrofit)
                 }
+
+                // LoadApp (Udacity)
                 R.id.radio_load_app -> {
                     url = URL_UDACITY
                     fileName = getString(R.string.source_udacity)

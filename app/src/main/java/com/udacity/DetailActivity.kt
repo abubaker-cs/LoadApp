@@ -21,17 +21,14 @@ class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Inflate Layout: @layout/activity_main.xml and bind @layout/content_main.xml
+        // Inflate Layout: @layout/activity_detail.xml and bind @layout/content_detail.xml
         _binding = DataBindingUtil.setContentView(this, R.layout.activity_detail)
         _bindingDetailContent = _binding.detailContent
 
         // Specify the current activity as the lifecycle owner.
         _binding.lifecycleOwner = this
 
-        /**
-         * This will allow us to hide the < Back button from the activity_main.xml
-         * Reference: https://developer.android.com/guide/navigation/navigation-ui#appbarconfiguration
-         */
+        // This will enable the Toolbar to act as the ActionBar for this Activity window.
         setSupportActionBar(_binding.toolbar)
 
         // Bind received data to the fileName and status TextViews
@@ -52,7 +49,7 @@ class DetailActivity : AppCompatActivity() {
 
         }
 
-        // onClickEvent: OK Button
+        // onClickEvent: OK (Button)
         _bindingDetailContent.btnOk.setOnClickListener {
 
             // This will close the detail activity, and navigate the user back to the main activity.
