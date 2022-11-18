@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     >
 
+    <!-- Wrapper: MotionLayout -->
     <androidx.constraintlayout.motion.widget.MotionLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
@@ -14,64 +15,48 @@
         tools:showIn="@layout/activity_detail"
         >
 
-        <!-- File Name -->
+        <!-- Label: File Name -->
         <TextView
             android:id="@+id/file_name_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:text="File Name"
-            android:textSize="20sp"
+            style="@style/detail_label"
+            android:text="@string/detail_fileName"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             />
 
+        <!-- Desc:: Glide | Retrofit | Udacity -->
         <TextView
             android:id="@+id/file_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:textSize="18sp"
+            style="@style/detail_desc"
             app:layout_constraintBaseline_toBaselineOf="@+id/file_name_label"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:text="Glide"
+            tools:text="Retrofit"
             />
 
-        <!-- Download Status: -->
+        <!-- Label: Download Status -->
         <TextView
             android:id="@+id/status_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="68dp"
-            android:text="File Download Status"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@+id/file_name_label"
+            style="@style/detail_label"
+            android:text="@string/detail_downloadStatus"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/file_name"
             />
 
+        <!-- Description: Success | Failure -->
         <TextView
             android:id="@+id/status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
+            style="@style/detail_desc"
             app:layout_constraintBaseline_toBaselineOf="@+id/status_label"
-            app:layout_constraintEnd_toEndOf="@+id/file_name"
+            app:layout_constraintEnd_toEndOf="parent"
             tools:text="Success"
             />
 
-        <!-- Button -->
+        <!-- Button: OK -->
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_ok"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="16dp"
-            android:background="@color/colorPrimaryDark"
-            android:text="OK"
-            android:textColor="@color/white"
-            app:cornerRadius="16dp"
+            style="@style/detail_btn_ok"
+            android:text="@string/btn_ok"
+            app:cornerRadius="@dimen/btn_border_radius"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

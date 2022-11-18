@@ -1,4 +1,11 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="default_text_size">20sp</dimen>
+    <dimen name="margin_start">24dp</dimen>
+    <dimen name="margin_top">48dp</dimen>
+    <dimen name="tv_label_font_size">21sp</dimen>
+    <dimen name="tv_desc_font_size">19sp</dimen>
+    <dimen name="btn_border_radius">24dp</dimen>
+    <dimen name="detail_desc_marginEnd">24dp</dimen>
+    <dimen name="detail_button_margin">24dp</dimen>
 </resources>
