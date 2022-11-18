@@ -196,10 +196,24 @@ class MainActivity : AppCompatActivity() {
 
         // 1. Prepare Custom Query with Constraints to be executed
         val request = DownloadManager.Request(Uri.parse(filePath))
+
+            // Title: LoadApp
+            // Set the title of this download, to be displayed in notifications (if enabled).
+            // If no title is given, a default one will be assigned based on the download filename,
+            // once the download starts.
             .setTitle(getString(R.string.app_name))
+
+            // Description:  (1) Description info (2) File Source Type (Glide / Retrofit / Udacity)
+            // Set a description of this download, to be displayed in notifications (if enabled)
             .setDescription(String.format(getString(R.string.app_description), fileSourceType))
+
+            // Constraint: Specify that to run this download, the device needs to be plugged in.
             .setRequiresCharging(false)
+
+            // Constraint: Set whether this download may proceed over a metered network connection.
             .setAllowedOverMetered(true)
+
+            // Constraint: Set whether this download may proceed over a roaming connection.
             .setAllowedOverRoaming(true)
 
         // 2. Execute the Query: Enqueue puts the download request in the queue.
