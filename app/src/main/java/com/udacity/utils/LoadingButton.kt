@@ -144,53 +144,49 @@ class LoadingButton @JvmOverloads constructor(
 
         }
 
-        //
+        // Set the Button State to: Clicked
         buttonState = ButtonState.Clicked
 
     }
 
 
     /**
-     * Will be used inside the drawTextButton() button
+     * Button: Text
      */
     private val btnLabelSettings = TextPaint(Paint.ANTI_ALIAS_FLAG).apply {
 
-        //
+        // Color Fill Mode
         style = Paint.Style.FILL
 
-        //
+        // Bold font weight
         typeface = Typeface.create("", Typeface.BOLD)
 
-        //
+        // Font Size
         textSize = 20.0f * resources.displayMetrics.density
 
-        //
+        // Text Alignment
         textAlign = Paint.Align.CENTER
 
-        //
+        // Text Color
         color = Color.WHITE
 
     }
 
-    //
+    // Button: Background
     private val btnBackgroundSettings = Paint(Paint.ANTI_ALIAS_FLAG).apply {
 
-        //
+        // Choose FILL style for the background
         style = Paint.Style.FILL
-
-        //
         color = backgroundButtonColor
 
     }
 
-    //
+    // Circular Shape
     private val circularAnimationSettings = Paint(Paint.ANTI_ALIAS_FLAG).apply {
 
-        //
-        color = circleProgressColor
-
-        //
+        // Choose FILL style for the background
         style = Paint.Style.FILL
+        color = circleProgressColor
 
     }
 
