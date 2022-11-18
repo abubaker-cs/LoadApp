@@ -63,14 +63,14 @@ class MainActivity : AppCompatActivity() {
         override fun onReceive(context: Context?, intent: Intent?) {
 
             // EXTRA_DOWNLOAD_ID = "extra_download_id"
-            val id = intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
+            // getLongExtra() = Retrieve extended data from the intent.
+            val retrievedId = intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
 
-            //
-            if (id == -1L)
+            if (retrievedId == -1L)
                 return
 
-            //
-            id?.let { intentId ->
+            // When the id (retrieved data) is not NULL, then:
+            retrievedId?.let { id ->
 
                 // Get instance of the DownloadManager
                 // Note: DOWNLOAD_SERVICE = "download"
@@ -80,13 +80,12 @@ class MainActivity : AppCompatActivity() {
                 val query = DownloadManager.Query()
 
                 // Include only the downloads with the given ID
-                query.setFilterById(intentId)
+                query.setFilterById(id)
 
                 // We are initializing the query to filter the downloaded data using our intentId
                 // and storing the result as a reference in the cursor variable
                 val cursor = downloadManager.query(query)
 
-                //
                 if (cursor.moveToFirst()) {
 
                     // COLUMN_STATUS = "status"
@@ -107,7 +106,10 @@ class MainActivity : AppCompatActivity() {
                         }
 
                     // It will forward the download status of SUCCESS / FAIL to the
-                    // sendNotifications() function fur further processing
+                    // sendNotifications() function fur further processing, such as:
+                    // 1. Create Notification Channel
+                    // 2. Prepare custom intent so it can forward additional information to the DetailActivity
+                    // 3. Use NotificationCompat.Builder to initialize the Notification
                     sendNotifications(downloadStatus)
 
                     // Set the LoadingButton's State to "Completed" in the content_main.xml file
