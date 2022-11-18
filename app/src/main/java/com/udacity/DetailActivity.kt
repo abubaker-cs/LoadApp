@@ -44,8 +44,8 @@ class DetailActivity : AppCompatActivity() {
 
         } else {
 
-            // Otherwise the text color for @+id/status should be GREEN to indicate success
-            _bindingContent.status.setTextColor(Color.GREEN)
+            // Otherwise the text color for @+id/status should be Custom Green Color to indicate success
+            _bindingContent.status.setTextColor(Color.parseColor("#08702B"))
 
         }
 
