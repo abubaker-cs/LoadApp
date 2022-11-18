@@ -178,7 +178,11 @@ class MainActivity : AppCompatActivity() {
      */
     override fun onResume() {
         super.onResume()
+
+        // The receiver can receive broadcasts from other Apps.
+        // ACTION_DOWNLOAD_COMPLETE = Broadcast intent action sent by the download manager when a download completes.
         registerReceiver(receiver, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
+
     }
 
     /**
@@ -186,7 +190,10 @@ class MainActivity : AppCompatActivity() {
      */
     override fun onPause() {
         super.onPause()
+
+        // Unregister a previously registered BroadcastReceiver.
         unregisterReceiver(receiver)
+
     }
 
     /**
