@@ -13,7 +13,7 @@
     <string name="notification_button">See changes</string>
 
     <string name="button_name">Click me</string>
-    <string name="button_loading">Downloading...</string>
+    <string name="button_loading">Downloading…</string>
 
     <string name="button_download_completed">Download Completed</string>
 

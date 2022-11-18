@@ -82,7 +82,8 @@ class MainActivity : AppCompatActivity() {
                 // Include only the downloads with the given ID
                 query.setFilterById(intentId)
 
-                //
+                // We are initializing the query to filter the downloaded data using our intentId
+                // and storing the result as a reference in the cursor variable
                 val cursor = downloadManager.query(query)
 
                 //
@@ -94,15 +95,22 @@ class MainActivity : AppCompatActivity() {
                     // STATUS_SUCCESSFUL = 8
                     val downloadStatus =
                         if (DownloadManager.STATUS_SUCCESSFUL == cursor.getInt(index)) {
+
+                            // String: Success
                             getString(R.string.success_status)
+
                         } else {
+
+                            // String: Failed
                             getString(R.string.failed_status)
+
                         }
 
-                    //
+                    // It will forward the download status of SUCCESS / FAIL to the
+                    // sendNotifications() function fur further processing
                     sendNotifications(downloadStatus)
 
-                    // Custom Button State: Completed
+                    // Set the LoadingButton's State to "Completed" in the content_main.xml file
                     _bindingContent.customButton.buttonState = ButtonState.Completed
 
                 }
