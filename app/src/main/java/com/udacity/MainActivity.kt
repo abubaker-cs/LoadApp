@@ -237,21 +237,33 @@ class MainActivity : AppCompatActivity() {
          * Create Notification Channel
          */
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+            // Create the notification channel based on:
+            // 1. CHANNEL_ID = "channelId"
+            // 2. CHANNEL_NAME = "notification_channel"
+            // 3. IMPORTANCE_DEFAULT = 3 (Stored in native NotificationManger.class)
             val channel = NotificationChannel(
                 CHANNEL_ID,
                 CHANNEL_NAME,
                 NotificationManager.IMPORTANCE_DEFAULT
             )
 
+            // Sets whether notification posted to this channel should vibrate.
             channel.enableVibration(true)
+
+            // Sets whether notifications posted to this channel should display notification lights,
+            // on devices that support that feature.
             channel.enableLights(true)
 
+            // Sets the user visible description of this channel to "Loading Completed"
             channel.description = getString(R.string.loading_completed)
 
+            //
             val notificationManager = this.getSystemService(
                 NotificationManager::class.java
             )
 
+            //
             notificationManager.createNotificationChannel(channel)
 
         }
