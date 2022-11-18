@@ -28,9 +28,7 @@
         <!-- Radio Group -->
         <RadioGroup
             android:id="@+id/radio_group"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
+            style="@style/download_sources"
             app:layout_constraintEnd_toEndOf="@+id/custom_button"
             app:layout_constraintStart_toStartOf="@+id/custom_button"
             app:layout_constraintTop_toBottomOf="@+id/header_img"
@@ -39,29 +37,23 @@
             <!-- Glide -->
             <com.google.android.material.radiobutton.MaterialRadioButton
                 android:id="@+id/radio_glide"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/options_item"
                 android:text="@string/desc_glide"
-                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
                 />
 
             <!-- Udacity (LoadApp) -->
             <com.google.android.material.radiobutton.MaterialRadioButton
                 android:id="@+id/radio_load_app"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="12dp"
+                style="@style/options_item"
+                android:layout_marginVertical="@dimen/options_items_padding"
                 android:text="@string/desc_udacity"
-                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
                 />
 
             <!-- Retrofit -->
             <com.google.android.material.radiobutton.MaterialRadioButton
                 android:id="@+id/radio_retrofit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/options_item"
                 android:text="@string/desc_retrofit"
-                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
                 />
 
         </RadioGroup>

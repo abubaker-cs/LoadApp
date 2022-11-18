@@ -52,4 +52,16 @@
         <item name="android:background">@color/colorPrimaryDark</item>
     </style>
 
+    <style name="download_sources">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/options_margin_top</item>
+    </style>
+
+    <style name="options_item">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAppearance">@style/TextAppearance.Material3.BodyLarge</item>
+    </style>
+
 </resources>

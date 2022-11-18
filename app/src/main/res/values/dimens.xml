@@ -8,4 +8,6 @@
     <dimen name="btn_border_radius">24dp</dimen>
     <dimen name="detail_desc_marginEnd">24dp</dimen>
     <dimen name="detail_button_margin">24dp</dimen>
+    <dimen name="options_margin_top">24dp</dimen>
+    <dimen name="options_items_padding">24dp</dimen>
 </resources>
