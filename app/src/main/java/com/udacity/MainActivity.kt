@@ -26,22 +26,33 @@ class MainActivity : AppCompatActivity() {
 
     // We are defining few variables which will be later on used to make references to the views
     private lateinit var _binding: ActivityMainBinding
-    private lateinit var _bindingDetailContent: ContentMainBinding
+    private lateinit var _bindingContent: ContentMainBinding
 
-    //
-    private var downloadID: Long = 0
+    // This reference will be used inside the download() function to execute the download query
+    // through downloadManager.enqueue()
+    private var downloadReference: Long = 0
 
-    //
+    // fileSourceType: It will be used as a reference of the source type from where the user’s
+    // selected file will be downloaded, i.e. Glide, Retrofit or Udacity (Github Account)
+    private lateinit var fileSourceType: String
+
+    // This will store the actual URL of the file to be downloaded, the information about the
+    // urls is stored in the companion object in following variables:
+    // 1. URL_GLIDE
+    // 2. URL_RETROFIT
+    // 3. URL_UDACITY
+    private lateinit var filePath: String
+
+    // This variable will be used to create a NotificationManager to inform the user that something
+    // has happened in the background.
     private lateinit var notificationManager: NotificationManager
 
-    //
+    // This reference will be used inside the download() function to execute the download query
+    // through DownloadManager
+    // *****
+    // Since we want the user to navigate from the Notification Message to the DetailedActivity,
+    // that’s why we will be using pendingIntent, which will help us to:
     private lateinit var pendingIntent: PendingIntent
-
-    //
-    private lateinit var fileName: String
-
-    //
-    private lateinit var url: String
 
     /**
      * Receiver
@@ -76,7 +87,7 @@ class MainActivity : AppCompatActivity() {
                     sendNotifications(downloadStatus)
 
                     // Custom Button State: Completed
-                    _bindingDetailContent.customButton.buttonState = ButtonState.Completed
+                    _bindingContent.customButton.buttonState = ButtonState.Completed
 
                 }
 
@@ -94,7 +105,7 @@ class MainActivity : AppCompatActivity() {
 
         // Inflate Layout: @layout/activity_main.xml and bind @layout/content_main.xml
         _binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        _bindingDetailContent = _binding.contentMain
+        _bindingContent = _binding.contentMain
 
         // Specify the current activity as the lifecycle owner.
         _binding.lifecycleOwner = this
@@ -105,11 +116,11 @@ class MainActivity : AppCompatActivity() {
         registerReceiver(receiver, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
 
         // onClickEvent: Download (Button)
-        _bindingDetailContent.customButton.setOnClickListener {
-            if (::url.isInitialized) {
+        _bindingContent.customButton.setOnClickListener {
+            if (::filePath.isInitialized) {
 
                 // Custom Button State: Loading
-                _bindingDetailContent.customButton.buttonState = ButtonState.Loading
+                _bindingContent.customButton.buttonState = ButtonState.Loading
                 download()
 
             } else
@@ -127,20 +138,20 @@ class MainActivity : AppCompatActivity() {
 
                 // Glide
                 R.id.radio_glide -> {
-                    url = URL_GLIDE
-                    fileName = getString(R.string.source_glide)
+                    filePath = URL_GLIDE
+                    fileSourceType = getString(R.string.source_glide)
                 }
 
                 // Retrofit
                 R.id.radio_retrofit -> {
-                    url = URL_RETROFIT
-                    fileName = getString(R.string.source_retrofit)
+                    filePath = URL_RETROFIT
+                    fileSourceType = getString(R.string.source_retrofit)
                 }
 
                 // LoadApp (Udacity)
                 R.id.radio_load_app -> {
-                    url = URL_UDACITY
-                    fileName = getString(R.string.source_udacity)
+                    filePath = URL_UDACITY
+                    fileSourceType = getString(R.string.source_udacity)
                 }
 
             }
@@ -171,16 +182,16 @@ class MainActivity : AppCompatActivity() {
     private fun download() {
 
         // 1. Prepare Custom Query with Constraints to be executed
-        val request = DownloadManager.Request(Uri.parse(url))
+        val request = DownloadManager.Request(Uri.parse(filePath))
             .setTitle(getString(R.string.app_name))
-            .setDescription(String.format(getString(R.string.app_description), fileName))
+            .setDescription(String.format(getString(R.string.app_description), fileSourceType))
             .setRequiresCharging(false)
             .setAllowedOverMetered(true)
             .setAllowedOverRoaming(true)
 
         // 2. Execute the Query: Enqueue puts the download request in the queue.
         val downloadManager = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
-        downloadID = downloadManager.enqueue(request)
+        downloadReference = downloadManager.enqueue(request)
     }
 
     /**
@@ -218,7 +229,7 @@ class MainActivity : AppCompatActivity() {
          */
         intent = Intent(applicationContext, DetailActivity::class.java)
         intent.putExtra(KEY_STATUS, status)
-        intent.putExtra(KEY_FILENAME, fileName)
+        intent.putExtra(KEY_FILENAME, fileSourceType)
 
         pendingIntent = PendingIntent.getActivity(
             applicationContext,
