@@ -14,47 +14,38 @@ import kotlin.properties.Delegates
  * Custom Loading Button
  */
 class LoadingButton @JvmOverloads constructor(
-
-    //
     context: Context,
-
-    //
     attrs: AttributeSet? = null,
-
-    //
     defStyleAttr: Int = 0
-
 ) : View(
-
-    //
     context,
-
-    //
     attrs,
-
-    //
     defStyleAttr
 ) {
 
+    // Width + Size
     private var widthSize = 0
     private var heightSize = 0
 
+    // This class provides a simple timing engine for running animations which calculate animated
+    // values and set them on target objects.
     private var valueAnimator = ValueAnimator()
 
-    //
-    private var buttonProgress: Float = 0f
+    // Button Text
+    private var btnText = ""
 
-    //
-    private var backgroundButtonColor = 0
+    // Button: Background Color
+    private var btnBackgroundColor = 0
 
-    //
-    private var circleProgressColor = 0
+    // Button: Progress Status
+    private var btnProgressAnimation: Float = 0f
 
-    //
-    private var textButton = ""
+    // Circular Progress
+    private var circularProgress = RectF(80f, 16f, 160f, 96f)
 
-    //
-    private var animatedCircleBeforeButtonLabel = RectF(80f, 16f, 160f, 96f)
+    // Circular Progress: Color
+    private var circularProgressColor = 0
+
 
     /**
      * buttonState()
@@ -77,7 +68,7 @@ class LoadingButton @JvmOverloads constructor(
 
                     //
                     addUpdateListener {
-                        buttonProgress = animatedValue as Float
+                        btnProgressAnimation = animatedValue as Float
                         invalidate()
                     }
 
@@ -132,15 +123,15 @@ class LoadingButton @JvmOverloads constructor(
         context.withStyledAttributes(attrs, R.styleable.LoadingButton) {
 
             // Background Color
-            backgroundButtonColor =
+            btnBackgroundColor =
                 getColor(R.styleable.LoadingButton_backgroundButtonColor, Color.GRAY)
 
             // Progress Circle
-            circleProgressColor =
+            circularProgressColor =
                 getColor(R.styleable.LoadingButton_circleProgressColor, Color.YELLOW)
 
             // Label
-            textButton = getString(R.styleable.LoadingButton_text).toString()
+            btnText = getString(R.styleable.LoadingButton_text).toString()
 
         }
 
@@ -148,7 +139,6 @@ class LoadingButton @JvmOverloads constructor(
         buttonState = ButtonState.Clicked
 
     }
-
 
     /**
      * Button: Text
@@ -177,7 +167,7 @@ class LoadingButton @JvmOverloads constructor(
 
         // Choose FILL style for the background
         style = Paint.Style.FILL
-        color = backgroundButtonColor
+        color = btnBackgroundColor
 
     }
 
@@ -186,7 +176,7 @@ class LoadingButton @JvmOverloads constructor(
 
         // Choose FILL style for the background
         style = Paint.Style.FILL
-        color = circleProgressColor
+        color = circularProgressColor
 
     }
 
@@ -203,11 +193,11 @@ class LoadingButton @JvmOverloads constructor(
 
             when (buttonState) {
                 ButtonState.Loading -> {
-                    buttonBackground(canvas, buttonProgress)
+                    buttonBackground(canvas, btnProgressAnimation)
                     drawArc(
-                        animatedCircleBeforeButtonLabel,
+                        circularProgress,
                         -180f,
-                        buttonProgress * 360,
+                        btnProgressAnimation * 360,
                         true,
                         circularAnimationSettings
                     )
@@ -220,7 +210,7 @@ class LoadingButton @JvmOverloads constructor(
                 }
 
                 else -> {
-                    buttonText(canvas, textButton)
+                    buttonText(canvas, btnText)
                 }
             }
 
