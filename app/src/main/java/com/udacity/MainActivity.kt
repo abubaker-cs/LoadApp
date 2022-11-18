@@ -55,35 +55,48 @@ class MainActivity : AppCompatActivity() {
     private lateinit var pendingIntent: PendingIntent
 
     /**
-     * Receiver
+     * BroadcastReceiver
      */
     private val receiver = object : BroadcastReceiver() {
 
         override fun onReceive(context: Context?, intent: Intent?) {
 
+            //
             val id = intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
 
+            //
             if (id == -1L)
                 return
 
+            //
             id?.let { intentId ->
+
+                //
                 val downloadManager = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
+
+                //
                 val query = DownloadManager.Query()
 
+                //
                 query.setFilterById(intentId)
 
+                //
                 val cursor = downloadManager.query(query)
 
+                //
                 if (cursor.moveToFirst()) {
 
+                    //
                     val index = cursor.getColumnIndex(DownloadManager.COLUMN_STATUS)
 
+                    //
                     val downloadStatus =
                         if (DownloadManager.STATUS_SUCCESSFUL == cursor.getInt(index))
                             getString(R.string.success_status)
                         else
                             getString(R.string.failed_status)
 
+                    //
                     sendNotifications(downloadStatus)
 
                     // Custom Button State: Completed
@@ -197,7 +210,7 @@ class MainActivity : AppCompatActivity() {
     /**
      * fun 02 - sendNotifications()
      */
-    private fun sendNotifications(status: String) {
+    private fun sendNotifications(downloadStatus: String) {
 
         /**
          * Create Notification Channel
@@ -228,7 +241,7 @@ class MainActivity : AppCompatActivity() {
          * 2. Name of the SOURCE
          */
         intent = Intent(applicationContext, DetailActivity::class.java)
-        intent.putExtra(KEY_STATUS, status)
+        intent.putExtra(KEY_STATUS, downloadStatus)
         intent.putExtra(KEY_FILENAME, fileSourceType)
 
         pendingIntent = PendingIntent.getActivity(
