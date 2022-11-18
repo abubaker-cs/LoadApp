@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
 
         override fun onReceive(context: Context?, intent: Intent?) {
 
-            //
+            // EXTRA_DOWNLOAD_ID = "extra_download_id"
             val id = intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
 
             //
