@@ -153,7 +153,7 @@ class MainActivity : AppCompatActivity() {
             } else
                 Toast.makeText(
                     this@MainActivity,
-                    getString(R.string.select_from_list),
+                    getString(R.string.alert_download_source),
                     Toast.LENGTH_SHORT
                 ).show()
         }

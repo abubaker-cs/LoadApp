@@ -31,9 +31,9 @@
     <string name="failed_status">Failed</string>
     <string name="success_status">Success</string>
 
-    <string name="select_from_list">Please select from list</string>
+    <string name="alert_download_source">Please select a download source</string>
     <string name="detail_fileName">File Name</string>
-    <string name="detail_downloadStatus">File Download Status</string>
+    <string name="detail_downloadStatus">Download Status</string>
     <string name="btn_ok">OK</string>
 
 </resources>

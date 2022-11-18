@@ -13,18 +13,16 @@
         tools:showIn="@layout/activity_main"
         >
 
-        <!-- Image: Download Icon -->
+        <!-- Header Image: With download icon -->
         <ImageView
             android:id="@+id/header_img"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@color/colorPrimaryDark"
+            style="@style/header_download_img"
             android:contentDescription="@string/header_img_desc"
             app:layout_constraintBottom_toTopOf="@+id/guideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_cloud_download"
+            app:srcCompat="@drawable/ic_download"
             />
 
         <!-- Radio Group -->
@@ -82,12 +80,11 @@
             app:text="Download"
             />
 
+        <!-- Guideline: 40% from the TOP -->
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.30"
+            style="@style/main_guideline"
+            app:layout_constraintGuide_percent="0.4"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
