@@ -4,7 +4,11 @@
     <string name="action_settings">Settings</string>
 
 
-    <string name="notification_title">Udacity: Android Kotlin Nanodegree </string>
+    <string name="notification_title">Udacity: Android Kotlin Nanodegree</string>
+
+    <string name="notification_content">Loading Completed</string>
+    <string name="notification_detail_button">Check the status</string>
+
     <string name="notification_description">The Project 3 repository is downloaded</string>
     <string name="notification_button">See changes</string>
 
@@ -26,9 +30,6 @@
 
     <string name="failed_status">Failed</string>
     <string name="success_status">Success</string>
-
-    <string name="loading_completed">Loading Completed</string>
-    <string name="see_result">Check the status</string>
 
     <string name="select_from_list">Please select from list</string>
 

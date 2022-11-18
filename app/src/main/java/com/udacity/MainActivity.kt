@@ -56,6 +56,7 @@ class MainActivity : AppCompatActivity() {
 
     /**
      * BroadcastReceiver
+     * Broadcast intent action sent by the download manager when a download completes.
      */
     private val receiver = object : BroadcastReceiver() {
 
@@ -126,6 +127,7 @@ class MainActivity : AppCompatActivity() {
         // This will enable the Toolbar to act as the ActionBar for this Activity window.
         setSupportActionBar(_binding.toolbar)
 
+        // Register "download completion" receiver
         registerReceiver(receiver, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
 
         // onClickEvent: Download (Button)
@@ -236,6 +238,8 @@ class MainActivity : AppCompatActivity() {
         /**
          * Create Notification Channel
          */
+
+        // We are checking if the device running the app has Android SDK 26 or up
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
             // Create the notification channel based on:
@@ -256,14 +260,17 @@ class MainActivity : AppCompatActivity() {
             channel.enableLights(true)
 
             // Sets the user visible description of this channel to "Loading Completed"
-            channel.description = getString(R.string.loading_completed)
+            channel.description = getString(R.string.notification_content)
 
-            //
+            // We are trying to get an instance of NotificationManager by calling getSystemService()
             val notificationManager = this.getSystemService(
                 NotificationManager::class.java
             )
 
-            //
+            // We are passing the channel object with following configuration:
+            // 1. Signature: Channel ID, Name and Importance Level
+            // 2. Enabled: Device Vibration, Notification Lights
+            // 3. Description: Loading Completed
             notificationManager.createNotificationChannel(channel)
 
         }
@@ -284,25 +291,40 @@ class MainActivity : AppCompatActivity() {
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
+        // We are passing the channel ID to the notification builder as a parameter
         val builder = NotificationCompat.Builder(
             applicationContext,
             CHANNEL_ID
         )
-            .setSmallIcon(R.drawable.ic_assistant_black_24dp)
+
+            // Notification icon: @drawable/ic_assistant.xml
+            .setSmallIcon(R.drawable.ic_assistant)
+
+            // Notification Title: Udacity: Android Kotlin Nanodegree
             .setContentTitle(applicationContext.getString(R.string.notification_title))
-            .setContentText(getString(R.string.loading_completed))
+
+            // Notification Content: Loading Completed
+            .setContentText(getString(R.string.notification_content))
+
+            // We are making sure that the notification message will be automatically canceled
+            // when the user will click it in the panel.
             .setAutoCancel(true)
+
+            // Notification CTA Button: Check the Status, it will navigate the user to the DetailActivity
             .addAction(
                 R.drawable.abc_vector_test,
-                getString(R.string.see_result),
+                getString(R.string.notification_detail_button),
                 pendingIntent
             )
 
+
+        // We are getting an instance of the NotificationManager
         notificationManager = ContextCompat.getSystemService(
             applicationContext,
             NotificationManager::class.java
         ) as NotificationManager
 
+        // This final step will initialize our Notification Message with customized parameters.
         notificationManager.notify(NOTIFICATION_ID, builder.build())
     }
 
