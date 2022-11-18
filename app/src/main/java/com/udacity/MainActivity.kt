@@ -72,13 +72,14 @@ class MainActivity : AppCompatActivity() {
             //
             id?.let { intentId ->
 
-                //
+                // Get instance of the DownloadManager
+                // Note: DOWNLOAD_SERVICE = "download"
                 val downloadManager = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
 
-                //
+                // We will use this reference/class to filter download manager queries
                 val query = DownloadManager.Query()
 
-                //
+                // Include only the downloads with the given ID
                 query.setFilterById(intentId)
 
                 //
@@ -87,15 +88,16 @@ class MainActivity : AppCompatActivity() {
                 //
                 if (cursor.moveToFirst()) {
 
-                    //
+                    // COLUMN_STATUS = "status"
                     val index = cursor.getColumnIndex(DownloadManager.COLUMN_STATUS)
 
-                    //
+                    // STATUS_SUCCESSFUL = 8
                     val downloadStatus =
-                        if (DownloadManager.STATUS_SUCCESSFUL == cursor.getInt(index))
+                        if (DownloadManager.STATUS_SUCCESSFUL == cursor.getInt(index)) {
                             getString(R.string.success_status)
-                        else
+                        } else {
                             getString(R.string.failed_status)
+                        }
 
                     //
                     sendNotifications(downloadStatus)
