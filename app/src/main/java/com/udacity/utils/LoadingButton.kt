@@ -63,25 +63,33 @@ class LoadingButton @JvmOverloads constructor(
                  * ValueAnimator provides a timing engine for running animation which calculates
                  * the animated values and set them on the target objects.
                  */
-
                 valueAnimator = ValueAnimator.ofFloat(0f, 1f).apply {
 
-                    //
+                    // Adds a listener to the set of listeners that are sent update events through
+                    // the life of an animation.
                     addUpdateListener {
+
+                        // The most recent value calculated by this ValueAnimator when there is just
+                        // one property being animated.
                         btnProgressAnimation = animatedValue as Float
+
+                        // Force the view to redraw
                         invalidate()
+
                     }
 
-                    //
-                    repeatCount = ValueAnimator.INFINITE
+                    // This value used used with the setRepeatCount(int) property to repeat the
+                    // animation indefinitely.
+                    repeatCount = ValueAnimator.INFINITE // -1
 
-                    //
-                    repeatMode = ValueAnimator.RESTART
+                    // When the animation reaches the end and repeatCount is INFINITE or a
+                    // positive value, the animation restarts from the beginning.
+                    repeatMode = ValueAnimator.RESTART // 1
 
                     // Button Animation Duration: 2.5sec
                     duration = 2500
 
-                    //
+                    // Start this animation
                     start()
 
                 }
