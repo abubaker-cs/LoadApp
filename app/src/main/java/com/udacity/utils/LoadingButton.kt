@@ -163,7 +163,7 @@ class LoadingButton @JvmOverloads constructor(
     }
 
     // Button: Background
-    private val btnBackgroundSettings = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+    private val btnBackground = Paint(Paint.ANTI_ALIAS_FLAG).apply {
 
         // Choose FILL style for the background
         style = Paint.Style.FILL
@@ -228,7 +228,7 @@ class LoadingButton @JvmOverloads constructor(
 
             //
             if (progress != null) {
-                btnBackgroundSettings.alpha = 220
+                btnBackground.alpha = 220
             }
 
             //
@@ -237,7 +237,7 @@ class LoadingButton @JvmOverloads constructor(
                 0f,
                 width.toFloat() * (progress ?: 1f),
                 height.toFloat(),
-                btnBackgroundSettings
+                btnBackground
             )
 
         }
@@ -283,37 +283,29 @@ class LoadingButton @JvmOverloads constructor(
     }
 
     /**
-     * 02 - onMeasure
+     * 02 - onMeasure()
+     * ================
+     * 1. It is a critical piece of the rendering contract between your component and its container.
+     * 2. It should be overridden to efficiently and accurately report the measurements of its contained parts
      */
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
 
-        //
+        // Minimum Width
         val minWidth: Int = paddingLeft + paddingRight + suggestedMinimumWidth
 
-        //
-        val w: Int = resolveSizeAndState(minWidth, widthMeasureSpec, 1)
+        // Width
+        val measuredWidth: Int = resolveSizeAndState(minWidth, widthMeasureSpec, 1)
 
-        //
-        val h: Int = resolveSizeAndState(
+        // Height
+        val measuredHeight: Int =
+            resolveSizeAndState(MeasureSpec.getSize(measuredWidth), heightMeasureSpec, 0)
 
-            //
-            MeasureSpec.getSize(w),
+        // Updated our global variable: Height
+        widthSize = measuredWidth
+        heightSize = measuredHeight
 
-            //
-            heightMeasureSpec,
-
-            //
-            0
-        )
-
-        //
-        widthSize = w
-
-        //
-        heightSize = h
-
-        //
-        setMeasuredDimension(w, h)
+        //  Call the setMeasuredDimension() method with the measured width and height once they have been calculated.
+        setMeasuredDimension(measuredWidth, measuredHeight)
 
     }
 
