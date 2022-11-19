@@ -188,10 +188,13 @@ class LoadingButton @JvmOverloads constructor(
 
         canvas?.apply {
 
-            //
+            // Draw the background of the custom button
             buttonBackground(canvas)
 
+            // Update the Button's TEXT, depending on the currently active buttonState (Mode)
             when (buttonState) {
+
+                // Downloading...
                 ButtonState.Loading -> {
                     buttonBackground(canvas, btnProgressAnimation)
                     drawArc(
@@ -205,15 +208,18 @@ class LoadingButton @JvmOverloads constructor(
                     buttonText(canvas, resources.getString(R.string.button_loading))
                 }
 
+                // Download Completed
                 ButtonState.Completed -> {
                     buttonText(canvas, resources.getString(R.string.button_download_completed))
                 }
 
+                // BLANK Label
                 else -> {
                     buttonText(canvas, btnText)
                 }
             }
 
+            // This will force our custom view to redraw
             invalidate()
 
         }
@@ -226,19 +232,11 @@ class LoadingButton @JvmOverloads constructor(
 
         canvas?.apply {
 
-            //
-            if (progress != null) {
-                btnBackground.alpha = 220
-            }
+            // If progress isNot Null then
+            if (progress != null) btnBackground.alpha = 220
 
-            //
-            drawRect(
-                0f,
-                0f,
-                width.toFloat() * (progress ?: 1f),
-                height.toFloat(),
-                btnBackground
-            )
+            // Draw a background
+            drawRect(0f, 0f, width.toFloat() * (progress ?: 1f), height.toFloat(), btnBackground)
 
         }
 
